@@ -50,8 +50,8 @@ mlp:
   batch_size: 256
 
 ext_fea:
-  # cp_dir: '.../all/mnt/data/model_weights/grm/...'
-  # save_dir: '.../all/mnt/data/model_weights/grm/SEEDV-NEW/ext_fea/fea'
+  # cp_dir 示例见 env/PATHS.md（用 ${oc.env:DAEST_LEGACY_ROOT}）
+  # save_dir 同上
   normTrain: True
   batch_size: 256
   mode: 'me'
@@ -70,5 +70,5 @@ hydra:
   job:
     chdir: true
   run:
-    # 本地运行用 ./runs；或使用 all 下 mnt：.../all/mnt/data/model_weights/grm/clisa_run/...
+    # 本地运行用 ./runs；或用 ${oc.env:DAEST_RUNS_ROOT}
     dir: ./runs/${data.dataset_name}/${now:%Y-%m-%d}/${now:%H-%M-%S}_run${log.run}
