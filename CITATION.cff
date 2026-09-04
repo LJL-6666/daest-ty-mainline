@@ -8,7 +8,7 @@ authors:
     alias: LJL-6666
 repository-code: "https://github.com/LJL-6666/daest-ty-mainline"
 abstract: >-
-  跨被试 EEG 情绪解码流水线（对比预训练 → 特征提取 → 分类头）在 TY 观影/讲述
+  DAEST 跨被试 EEG 情绪解码流水线（对比预训练 → 特征提取 → 分类头）在 TY 观影/讲述
   两任务与 FACED 上的主线结果，含 16 个实验的机器可读指标表、视频级 OOF 预测
   与方法学限制说明。
 license: MIT
