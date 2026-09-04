@@ -1,0 +1,8 @@
+# 不入库的大文件清单。相对 $DAEST_RUNS_ROOT。
+# 总量约 5 GB：特征 4.6 GB + 逐窗 OOF 213 MB + 权重 36 MB。
+# 特征与逐窗 OOF 均可由「权重 + 原始数据 + scripts/」重算；权重重训不可逐位复现，建议归档。
+kind	approx_size	note
+features_npy	4.6 GB	70 个 *_fea_me.npy，由 src/extract_fea.py 产出，可重算
+window_level_oof	213 MB	10 个逐窗 CSV，由 src/export_window_predictions_oof.py 产出，可重算；仓库内已收录其视频级摘要
+checkpoints	36 MB	70 个 *.ckpt（encoder + MLP）。★ 建议单独归档或用 git-lfs：有它即可跳过 train_ext
+logs	134 MB	223 个 *.log，不必保留
