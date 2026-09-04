@@ -18,6 +18,12 @@ from model.pl_models import MLPModel
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import os as _os
+RUNS_ROOT = _os.environ.get("DAEST_RUNS_ROOT", ".")
+RIEM_ROOT = _os.environ.get("DAEST_RIEM_ROOT", RUNS_ROOT)
+PREP_ROOT = _os.environ.get("DAEST_PREP_ROOT", ".")
+DATA_ROOT = _os.environ.get("DAEST_DATA_ROOT", ".")
+
 
 N_SUBS = 123
 N_FOLDS = 10
@@ -157,7 +163,7 @@ def plot_confusion_matrix(all_pred, all_true, out_path):
 def main():
     parser = argparse.ArgumentParser(description='FACED_05_47 10-Fold visualization')
     parser.add_argument('--feat_dir', type=str, 
-                       default='/data/liujialing/TY/data/data-faced/0.05–47 Hz_mat/ext_fea/fea_r1',
+                       default=f'{DATA_ROOT}/data-faced/0.05–47 Hz_mat/ext_fea/fea_r1',
                        help='Path to folder containing *_f*_fea_me.npy and onesub_label2.npy')
     parser.add_argument('--cp_dir', type=str, 
                        default='runs/FACED_05_47_cp/runs/cp',

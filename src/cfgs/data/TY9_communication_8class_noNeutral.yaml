@@ -4,10 +4,10 @@
 # 原 5/6/7/8 重映射为 4/5/6/7。视频仍是 28 个，running_norm / 重排 / LDS 全部沿用 9 类版原始输出。
 dataset_name: 'TY6'
 save_dataset_name: 'TY9_communication_8class'
-data_dir: '/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_communication'
+data_dir: '${oc.env:DAEST_PREP_ROOT}/output/9_communication'
 pkl_file: 'data_9class_communication.pkl'
 work_dir: 'runs'
-questionnaire_dir: '/data/liujialing/TY/data/data-tongyong/原始数据/问卷'
+questionnaire_dir: '${oc.env:DAEST_DATA_ROOT}/data-tongyong/原始数据/问卷'
 questionnaire_task: 'exp1'
 
 fs: 250

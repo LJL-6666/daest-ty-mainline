@@ -44,7 +44,7 @@ bash scripts/30_ablations.sh          # 实验 30–32
 bash scripts/40_export_figures.sh     # OOF 导出 + metrics.csv + 全部图
 ```
 
-原始数据不在本仓库，路径见 `MANIFEST/data_sources.md`。
+原始数据不在本仓库。先按 `env/PATHS.md` 设置环境变量，数据来源见 `MANIFEST/data_sources.md`。
 有 encoder 权重（36 MB，git-lfs）即可跳过 `train_ext`，直接从 `extract_fea` 起跑。
 
 ## ⚠ 使用本仓库结果前必读

@@ -533,9 +533,9 @@ def save_sliced_data(sliced_data_dir, data, onesub_labels, n_samples_onesub, n_s
     print('save sliced data finished!')
 
 def test_load_processed_SEEDV_data():
-    data_dir = '/data/liujialing/TY/建模/被试间/DAEST/脑电/all/mnt/data/model_weights/grm/SEEDV/EEG_processed_sxk'
+    data_dir = os.environ.get('DAEST_LEGACY_ROOT','./legacy')+'/SEEDV/EEG_processed_sxk'
     # data_dir = 'D:/graduate/G2/xinke/SEEDV/EEG_processed_sxk'
-    data_dir2 = '/data/liujialing/TY/建模/被试间/DAEST/脑电/all/mnt/data/model_weights/grm/SEEDV/EEG_processed_sampled'
+    data_dir2 = os.environ.get('DAEST_LEGACY_ROOT','./legacy')+'/SEEDV/EEG_processed_sampled'
     # data_dir2 = 'D:/graduate/G2/xinke/SEEDV/EEG_processed_sampled'
     timeLen = 5
     timeStep = 2
@@ -555,10 +555,10 @@ def test_load_processed_SEEDV_data():
     sampled_data['n_samples_sessions'] = n_samples_sessions
 
 def test_load_processed_SEEDV_NEW_data():
-    data_dir = '/data/liujialing/TY/建模/被试间/DAEST/脑电/all/mnt/data/model_weights/grm/SEEDV-NEW/processed_data'
+    data_dir = os.environ.get('DAEST_LEGACY_ROOT','./legacy')+'/SEEDV-NEW/processed_data'
     # data_dir = '.../all/model_weights/grm/SEEDV_new2/processed_ddata'
     # data_dir = 'D:/graduate/G2/xinke/SEEDV/EEG_processed_sxk'
-    data_dir2 = '/data/liujialing/TY/建模/被试间/DAEST/脑电/all/mnt/data/model_weights/grm/SEEDV/EEG_processed_sampled'
+    data_dir2 = os.environ.get('DAEST_LEGACY_ROOT','./legacy')+'/SEEDV/EEG_processed_sampled'
     # data_dir2 = 'D:/graduate/G2/xinke/SEEDV/EEG_processed_sampled'
     timeLen = 5
     timeStep = 2

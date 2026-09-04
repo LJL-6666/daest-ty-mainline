@@ -57,6 +57,12 @@ from torch.utils.data import DataLoader
 
 from data.dataset import PDataset
 from model.pl_models import MLPModel
+import os as _os
+RUNS_ROOT = _os.environ.get("DAEST_RUNS_ROOT", ".")
+RIEM_ROOT = _os.environ.get("DAEST_RIEM_ROOT", RUNS_ROOT)
+PREP_ROOT = _os.environ.get("DAEST_PREP_ROOT", ".")
+DATA_ROOT = _os.environ.get("DAEST_DATA_ROOT", ".")
+
 
 CLASS_NAMES_9 = [
     "anger",
@@ -115,12 +121,12 @@ PRESETS = {
         n_vids=28,
         save_name="FACED",
         # fea_r1 已缺失；fea_r3 + mlp r3 与现成 ~59.9% 图一致
-        feat_dir="/data/liujialing/TY/建模/被试间/DAEST/黎曼/FACED-base/runs/FACED_05_47_cp/fea_r3",
-        cp_dir="/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/runs/FACED_05_47_cp/runs/cp",
+        feat_dir=f"{RIEM_ROOT}/runs/FACED_05_47_cp/fea_r3",
+        cp_dir=f"{RUNS_ROOT}/runs/FACED_05_47_cp/runs/cp",
         run=3,
         mode="me",
         out_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/FACED_05_47_cp/runs/window_predictions_oof_r3"
         ),
         subject_ids_pkl=None,
@@ -134,21 +140,21 @@ PRESETS = {
         n_vids=28,
         save_name="TY9_movie",
         feat_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_movie_ME_cp/runs/TY9_movie/ext_fea/fea_r1"
         ),
         cp_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_movie_ME_cp/runs/cp"
         ),
         run=1,
         mode="me",
         out_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_movie_ME_cp/runs/window_predictions_oof_r1"
         ),
         subject_ids_pkl=(
-            "/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_movie/"
+            f"{PREP_ROOT}/output/9_movie/"
             "data_9class_movie.pkl"
         ),
         ckpt_pick="mtime",
@@ -161,21 +167,21 @@ PRESETS = {
         n_vids=28,
         save_name="TY9_communication",
         feat_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_communication_ME_cp/runs/TY9_communication/ext_fea/fea_r1"
         ),
         cp_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_communication_ME_cp/runs/cp"
         ),
         run=1,
         mode="me",
         out_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_communication_ME_cp/runs/window_predictions_oof_r1"
         ),
         subject_ids_pkl=(
-            "/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_communication/"
+            f"{PREP_ROOT}/output/9_communication/"
             "data_9class_communication.pkl"
         ),
         ckpt_pick="mtime",
@@ -191,21 +197,21 @@ PRESETS = {
         n_vids=28,
         save_name="TY9_communication_8class",
         feat_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_communication_8class_A_cp/runs/TY9_communication_8class/ext_fea/fea_r1"
         ),
         cp_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_communication_8class_A_cp/runs/cp"
         ),
         run=1,
         mode="me",
         out_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_communication_8class_A_cp/runs/window_predictions_oof_r1"
         ),
         subject_ids_pkl=(
-            "/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_communication/"
+            f"{PREP_ROOT}/output/9_communication/"
             "data_9class_communication.pkl"
         ),
         ckpt_pick="mtime",
@@ -221,21 +227,21 @@ PRESETS = {
         n_vids=28,
         save_name="TY8_movie_self",
         feat_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY8_movie_self_ME_cp/runs/TY8_movie_self/ext_fea/fea_r1"
         ),
         cp_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY8_movie_self_ME_cp/runs/cp"
         ),
         run=1,
         mode="me",
         out_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY8_movie_self_ME_cp/runs/window_predictions_oof_r1"
         ),
         subject_ids_pkl=(
-            "/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/8_movie_self/"
+            f"{PREP_ROOT}/output/8_movie_self/"
             "data_8class_movie_self.pkl"
         ),
         ckpt_pick="mtime",
@@ -251,21 +257,21 @@ PRESETS = {
         n_vids=28,
         save_name="TY8_communication_self",
         feat_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY8_communication_self_ME_cp/runs/TY8_communication_self/ext_fea/fea_r1"
         ),
         cp_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY8_communication_self_ME_cp/runs/cp"
         ),
         run=1,
         mode="me",
         out_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY8_communication_self_ME_cp/runs/window_predictions_oof_r1"
         ),
         subject_ids_pkl=(
-            "/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/8_communication_self/"
+            f"{PREP_ROOT}/output/8_communication_self/"
             "data_8class_communication_self.pkl"
         ),
         ckpt_pick="mtime",
@@ -281,21 +287,21 @@ PRESETS = {
         n_vids=28,
         save_name="TY9_movie_matched51",
         feat_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_movie_matched51_ME_cp/runs/TY9_movie_matched51/ext_fea/fea_r1"
         ),
         cp_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_movie_matched51_ME_cp/runs/cp"
         ),
         run=1,
         mode="me",
         out_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_movie_matched51_ME_cp/runs/window_predictions_oof_r1"
         ),
         subject_ids_pkl=(
-            "/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_movie_matched51/"
+            f"{PREP_ROOT}/output/9_movie_matched51/"
             "data_9class_movie_matched51.pkl"
         ),
         ckpt_pick="mtime",
@@ -308,21 +314,21 @@ PRESETS = {
         n_vids=28,
         save_name="TY9_communication_matched51",
         feat_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_communication_matched51_ME_cp/runs/TY9_communication_matched51/ext_fea/fea_r1"
         ),
         cp_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_communication_matched51_ME_cp/runs/cp"
         ),
         run=1,
         mode="me",
         out_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_communication_matched51_ME_cp/runs/window_predictions_oof_r1"
         ),
         subject_ids_pkl=(
-            "/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_communication_matched51/"
+            f"{PREP_ROOT}/output/9_communication_matched51/"
             "data_9class_communication_matched51.pkl"
         ),
         ckpt_pick="mtime",
@@ -336,21 +342,21 @@ PRESETS = {
         n_vids=28,
         save_name="TY9_movie",
         feat_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/FACED_to_TY9_movie_mlp_ft_cp/runs/TY9_movie/ext_fea/fea_r1"
         ),
         cp_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/FACED_to_TY9_movie_mlp_ft_cp/runs/cp"
         ),
         run=1,
         mode="me",
         out_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/FACED_to_TY9_movie_mlp_ft_cp/runs/window_predictions_oof_r1"
         ),
         subject_ids_pkl=(
-            "/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_movie/"
+            f"{PREP_ROOT}/output/9_movie/"
             "data_9class_movie.pkl"
         ),
         ckpt_pick="mtime",
@@ -363,21 +369,21 @@ PRESETS = {
         n_vids=28,
         save_name="TY9_communication",
         feat_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/FACED_to_TY9_communication_mlp_ft_cp/runs/TY9_communication/ext_fea/fea_r1"
         ),
         cp_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/FACED_to_TY9_communication_mlp_ft_cp/runs/cp"
         ),
         run=1,
         mode="me",
         out_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/FACED_to_TY9_communication_mlp_ft_cp/runs/window_predictions_oof_r1"
         ),
         subject_ids_pkl=(
-            "/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_communication/"
+            f"{PREP_ROOT}/output/9_communication/"
             "data_9class_communication.pkl"
         ),
         ckpt_pick="mtime",
@@ -390,23 +396,23 @@ PRESETS = {
         n_vids=28,
         save_name="TY9_communication_matched51",
         feat_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_movie_to_TY9_communication_mlp_ft_matched51_cp/"
             "runs/TY9_communication_matched51/ext_fea/fea_r1"
         ),
         cp_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_movie_to_TY9_communication_mlp_ft_matched51_cp/runs/cp"
         ),
         run=1,
         mode="me",
         out_dir=(
-            "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/"
+            f"{RUNS_ROOT}/"
             "runs/TY9_movie_to_TY9_communication_mlp_ft_matched51_cp/"
             "runs/window_predictions_oof_r1"
         ),
         subject_ids_pkl=(
-            "/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_communication_matched51/"
+            f"{PREP_ROOT}/output/9_communication_matched51/"
             "data_9class_communication_matched51.pkl"
         ),
         ckpt_pick="mtime",

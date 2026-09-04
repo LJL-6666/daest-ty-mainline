@@ -4,10 +4,10 @@
 # dataset_name 保持 TY6 以复用 TY pkl loader；save_dataset_name 隔离写出路径
 dataset_name: 'TY6'
 save_dataset_name: 'TY9_communication_matched51'
-data_dir: '/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_communication_matched51'
+data_dir: '${oc.env:DAEST_PREP_ROOT}/output/9_communication_matched51'
 pkl_file: 'data_9class_communication_matched51.pkl'
 work_dir: 'runs'
-questionnaire_dir: '/data/liujialing/TY/data/data-tongyong/原始数据/问卷'
+questionnaire_dir: '${oc.env:DAEST_DATA_ROOT}/data-tongyong/原始数据/问卷'
 questionnaire_task: 'exp1'
 fs: 250
 n_channs: 31

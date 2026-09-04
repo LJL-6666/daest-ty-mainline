@@ -13,7 +13,7 @@ log:
   exp_name: ''
 
   # cp_dir: ext/mlp cp save path, different dataset will be saved in separate subfolder 
-  cp_dir: '/data/liujialing/TY/建模/被试间/DAEST/脑电/all/mnt/data/model_weights/grm/clisa_cp2/'   
+  cp_dir: '${oc.env:DAEST_LEGACY_ROOT,./legacy}/clisa_cp2/'   
 
 
 

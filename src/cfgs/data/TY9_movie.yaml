@@ -4,11 +4,11 @@
 # dataset_name 保持 TY6 以复用 TY pkl loader；save_dataset_name 隔离写出路径
 dataset_name: 'TY6'
 save_dataset_name: 'TY9_movie'
-data_dir: '/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_movie'
+data_dir: '${oc.env:DAEST_PREP_ROOT}/output/9_movie'
 pkl_file: 'data_9class_movie.pkl'
 work_dir: 'runs'
 # 28 视频播放顺序：问卷 CSV（与预处理 main_tongyong / FACED extract_fea 一致）
-questionnaire_dir: '/data/liujialing/TY/data/data-tongyong/原始数据/问卷'
+questionnaire_dir: '${oc.env:DAEST_DATA_ROOT}/data-tongyong/原始数据/问卷'
 questionnaire_task: 'exp0'   # 电影任务用 exp0*rating*.csv
 
 fs: 250

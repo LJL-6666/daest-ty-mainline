@@ -33,6 +33,6 @@ def FACED_old2new(old_dir,new_dir):
             print()
             
 if __name__ == '__main__':
-    old_dir = '/data/liujialing/TY/建模/被试间/DAEST/脑电/all/mnt/data/model_weights/grm/FACED/processed_data/'
-    new_dir = '/data/liujialing/TY/建模/被试间/DAEST/脑电/all/mnt/data/model_weights/grm/FACED_old/processed_data/'
+    old_dir = os.environ.get('DAEST_LEGACY_ROOT','./legacy')+'/FACED/processed_data/'
+    new_dir = os.environ.get('DAEST_LEGACY_ROOT','./legacy')+'/FACED_old/processed_data/'
     FACED_old2new(old_dir,new_dir)

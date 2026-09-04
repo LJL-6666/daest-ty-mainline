@@ -2,8 +2,8 @@
 # data_dir 指向「转成 .mat 后的根目录」，代码会读 data_dir/processed_data 下的 .mat
 # after_remarks_dir：FACED 视频播放顺序，每被试 subXXX/After_remarks.mat
 dataset_name: 'FACED'
-data_dir: '/data/liujialing/TY/data/data-faced/0.05–47 Hz_mat'
-after_remarks_dir: '/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/After_remarks'
+data_dir: '${oc.env:DAEST_DATA_ROOT}/data-faced/0.05–47 Hz_mat'
+after_remarks_dir: '${oc.env:DAEST_RUNS_ROOT}/After_remarks'
 fs: 250
 n_channs: 32
 n_session: 1

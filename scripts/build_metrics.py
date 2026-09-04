@@ -3,7 +3,7 @@
    正文所有表格与森林图应由本文件产出的 metrics.csv 驱动，不要手工誊数字。"""
 import glob,os,numpy as np,pandas as pd
 from scipy.stats import spearmanr
-SRC=os.environ.get("DAEST_RUNS_ROOT","/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base")
+SRC=os.environ.get("DAEST_RUNS_ROOT","{RUNS_ROOT}")
 REPO=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POS9=[2,5,8,11,14.5,18,21,24,27]   # 九类情绪的 videoIndex 中点（中性 4 个视频 → 14.5）
 E=[
