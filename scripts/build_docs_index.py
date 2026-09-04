@@ -25,6 +25,14 @@ for arm in ["baseline","zeroshot","mlpft","ablation"]:
                  f"**{r.mean_subject_acc:.2f}%** | {'＝' if same else f'{r.overall_acc:.2f}%'} | "
                  f"{r.mean_subject_acc/r.chance:.2f}× | {r.n_recall_gt20}/{r.n_class} | {c} | {rho} |")
     L.append("")
+    _fd=f"{R}/results/figures/per_experiment"
+    for _,r in d.iterrows():
+        g=[f for f in sorted(os.listdir(_fd)) if f.startswith(f"exp{r.exp_id}_")]
+        if not g: continue
+        warn=" ⚠ **分类器塌陷，该准确率不代表有效性能**" if r.get("status")=="degenerate" else ""
+        L+=[f"#### {r.exp_id} · {r['name']}{warn}","",
+            f"![{r['name']}](../results/figures/per_experiment/{g[0]})","",
+            "<sub>左：逐被试准确率（灰＝每被试，绿＝均值±SD，红虚线＝随机）　右：混淆矩阵（行归一化 %）</sub>",""]
 dg=df[df.get("status")=="degenerate"] if "status" in df else df.iloc[0:0]
 if not dg.empty:
     L+=["> **⚠ 标记的实验分类器已塌陷**，其准确率约等于最大类占比，不代表有效性能：",""]
