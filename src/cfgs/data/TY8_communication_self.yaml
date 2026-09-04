@@ -1,0 +1,27 @@
+# TY 交流 自评 argmax 8 分类（DAEST 跨被试）
+# 输入: output/8_communication_self/data_8class_communication_self.pkl
+# 口径: 与 TY9_communication 同源 118 人 / 28 视频 EEG；标签改为逐被试自评 8 类（exp1）
+# 全 0/缺评 → label=-1（按视频剔除，不映射 anger）；MLP ignore_index=-1
+# extract_fea 对 118 人须串行（LDS ~35GB+/折）
+# dataset_name 保持 TY6 以复用 TY pkl loader；save_dataset_name 隔离写出路径
+dataset_name: 'TY6'
+save_dataset_name: 'TY8_communication_self'
+data_dir: '/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/8_communication_self'
+pkl_file: 'data_8class_communication_self.pkl'
+work_dir: 'runs'
+questionnaire_dir: '/data/liujialing/TY/data/data-tongyong/原始数据/问卷'
+questionnaire_task: 'exp1'   # 交流自评来自 exp1 问卷
+fs: 250
+n_channs: 31
+n_session: 1
+n_subs: 118
+n_vids: 28
+n_class: 8
+
+# 与 FACED / TY9 一致：预训练窗 5s/2s，下游 1s/1s
+timeLen: 5
+timeStep: 2
+timeLen2: 1
+timeStep2: 1
+
+class_names: ['anger', 'disgust', 'fear', 'sadness', 'amusement', 'inspiration', 'joy', 'tenderness']

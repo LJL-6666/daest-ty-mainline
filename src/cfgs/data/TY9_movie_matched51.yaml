@@ -1,0 +1,27 @@
+# TY 观影 素材 9 类 · 双任务共同 51 人（与交流交集；排除仅观影 079）
+# 输入: output/9_movie_matched51/data_9class_movie_matched51.pkl
+# 口径: 仅素材硬标签；不做自评；不覆盖全量 52 人 TY9_movie_ME_cp
+# 被试顺序与 TY9_communication_matched51 对齐
+# dataset_name 保持 TY6 以复用 TY pkl loader；save_dataset_name 隔离写出路径
+dataset_name: 'TY6'
+save_dataset_name: 'TY9_movie_matched51'
+data_dir: '/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_movie_matched51'
+pkl_file: 'data_9class_movie_matched51.pkl'
+work_dir: 'runs'
+questionnaire_dir: '/data/liujialing/TY/data/data-tongyong/原始数据/问卷'
+questionnaire_task: 'exp0'
+
+fs: 250
+n_channs: 31
+n_session: 1
+n_subs: 51
+n_vids: 28
+n_class: 9
+
+# 与 FACED / TY9 一致：预训练窗 5s/2s，下游 1s/1s
+timeLen: 5
+timeStep: 2
+timeLen2: 1
+timeStep2: 1
+
+class_names: ['anger', 'disgust', 'fear', 'sadness', 'neutral', 'amusement', 'inspiration', 'joy', 'tenderness']

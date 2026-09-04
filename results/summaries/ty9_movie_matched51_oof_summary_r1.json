@@ -1,0 +1,136 @@
+{
+  "dataset": "TY9_movie_matched51",
+  "run": 1,
+  "n_subs": 51,
+  "n_folds": 5,
+  "n_class": 9,
+  "n_vids": 28,
+  "windows_per_video": 30,
+  "time_len2_sec": 1.0,
+  "time_step2_sec": 1.0,
+  "n_rows": 42840,
+  "n_eval_rows": 42840,
+  "n_subjects_with_valid": 51,
+  "subjects_all_invalid": [],
+  "ignore_invalid": false,
+  "use_allsubs_labels": false,
+  "overall_acc": 0.32138188608776846,
+  "mean_subject_acc": 0.3213818860877684,
+  "std_subject_acc": 0.13471773632248213,
+  "chance": 0.1111111111111111,
+  "feat_dir": "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/runs/TY9_movie_matched51_mainline_biLDS_cp/runs/TY9_movie_matched51/ext_fea/fea_r1",
+  "cp_dir": "/data/liujialing/TY/建模/被试间/DAEST/脑电/all/FACED-base/runs/TY9_movie_matched51_mainline_biLDS_cp/runs/cp",
+  "anti_leakage": {
+    "protocol": "subject-wise OOF: fold-k model + fold-k features → fold-k val subjects only",
+    "each_subject_in_exactly_one_val_fold": true,
+    "train_subjects_not_scored_by_same_fold_model": true
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "n_val_subs": 10,
+      "val_subs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "n_windows": 8400,
+      "n_eval_windows": 8400,
+      "acc": 0.2894047619047619,
+      "feature_file": "_r1_f0_fea_me.npy",
+      "mlp_ckpt": "mlp_f0_wd=0.0022_epoch=1.ckpt"
+    },
+    {
+      "fold": 1,
+      "n_val_subs": 10,
+      "val_subs": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "n_windows": 8400,
+      "n_eval_windows": 8400,
+      "acc": 0.3492857142857143,
+      "feature_file": "_r1_f1_fea_me.npy",
+      "mlp_ckpt": "mlp_f1_wd=0.0022_epoch=10.ckpt"
+    },
+    {
+      "fold": 2,
+      "n_val_subs": 10,
+      "val_subs": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "n_windows": 8400,
+      "n_eval_windows": 8400,
+      "acc": 0.30095238095238097,
+      "feature_file": "_r1_f2_fea_me.npy",
+      "mlp_ckpt": "mlp_f2_wd=0.0022_epoch=78.ckpt"
+    },
+    {
+      "fold": 3,
+      "n_val_subs": 10,
+      "val_subs": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "n_windows": 8400,
+      "n_eval_windows": 8400,
+      "acc": 0.36833333333333335,
+      "feature_file": "_r1_f3_fea_me.npy",
+      "mlp_ckpt": "mlp_f3_wd=0.0022_epoch=19.ckpt"
+    },
+    {
+      "fold": 4,
+      "n_val_subs": 11,
+      "val_subs": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "n_windows": 9240,
+      "n_eval_windows": 9240,
+      "acc": 0.30097402597402595,
+      "feature_file": "_r1_f4_fea_me.npy",
+      "mlp_ckpt": "mlp_f4_wd=0.0022_epoch=31.ckpt"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+
+defaults:
+  - _self_
+  - data: SEEDV
+  - model: cnn_att
+
+seed: 7
+
+log:
+  run: 4
+  proj_name: 'CLISA_FACED_new'
+
+  exp_name: ''
+
+  # cp_dir: ext/mlp cp save path, different dataset will be saved in separate subfolder 
+  cp_dir: '/data/liujialing/TY/建模/被试间/DAEST/脑电/all/mnt/data/model_weights/grm/clisa_cp2/'   
+
+
+
+train:
+  gpus: [2]
+  use_cpu: false     # true 时全程用 CPU（不占 GPU）；extract_fea 可设 true 省卡
+  valid_method: 10
+  fold_index: null   # 非空时只跑该折（用于「每折一卡」并行：多进程各跑 train.fold_index=0,1,...）
+  iftest: False
+  n_subs: ${data.n_subs}
+  lr: 0.0007
+  wd: 0.00015
+  loss_temp: 0.07
+  max_epochs: 30
+  min_epochs: 10
+  patience: 30
+  num_workers: 4
+  restart_times: ${train.max_epochs}  # scheduler
+
+
+mlp:
+  # fea_dim: 256 #${model.n_timeFilters*model.n_msFilters*4}
+  hidden_dim: [128,64]
+  out_dim: ${data.n_class}
+  dropout: 0.1
+  bn: 'no'
+  lr: 0.0005  #0.0005
+  wd: 0.0022   #0.001-0.005
+  max_epochs: 100
+  min_epochs: 30
+  patience: 30
+  gpus: ${train.gpus}
+  num_workers: ${train.num_workers}
+  batch_size: 256
+
+ext_fea:
+  # cp_dir: '.../all/mnt/data/model_weights/grm/...'
+  # save_dir: '.../all/mnt/data/model_weights/grm/SEEDV-NEW/ext_fea/fea'
+  normTrain: True
+  batch_size: 256
+  mode: 'me'
+  rn_decay: 0.990
+  use_running_norm: true
+  use_lds: true
+  lds_v0: 0.01
+  lds_t: 0.0001
+  lds_sigma: 1.0
+  lds_given_all: 1
+  ckpt_run: null
+  use_pretrain: True
+
+
+hydra:
+  job:
+    chdir: true
+  run:
+    # 本地运行用 ./runs；或使用 all 下 mnt：.../all/mnt/data/model_weights/grm/clisa_run/...
+    dir: ./runs/${data.dataset_name}/${now:%Y-%m-%d}/${now:%H-%M-%S}_run${log.run}

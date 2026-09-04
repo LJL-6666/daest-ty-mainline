@@ -1,0 +1,25 @@
+# TY 交流 素材标签 8 分类（去掉中性这一类）
+# 复用 A 版（主线正确版）已提取的 9 类特征，特征文件通过软链只读引用，不重跑 extract_fea。
+# 中性(原 label=4，120 窗) 置为 -1：不进损失(ignore_index=-1)、不进指标；
+# 原 5/6/7/8 重映射为 4/5/6/7。视频仍是 28 个，running_norm / 重排 / LDS 全部沿用 9 类版原始输出。
+dataset_name: 'TY6'
+save_dataset_name: 'TY9_communication_8class'
+data_dir: '/data/liujialing/TY/预处理/python/Preprocessing/全部的TY/output/9_communication'
+pkl_file: 'data_9class_communication.pkl'
+work_dir: 'runs'
+questionnaire_dir: '/data/liujialing/TY/data/data-tongyong/原始数据/问卷'
+questionnaire_task: 'exp1'
+
+fs: 250
+n_channs: 31
+n_session: 1
+n_subs: 118
+n_vids: 28
+n_class: 8
+
+timeLen: 5
+timeStep: 2
+timeLen2: 1
+timeStep2: 1
+
+class_names: ['anger', 'disgust', 'fear', 'sadness', 'amusement', 'inspiration', 'joy', 'tenderness']
