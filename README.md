@@ -23,7 +23,7 @@
 src/        三步流水线 train_ext → extract_fea → train_mlp，及导出/可视化
 scripts/    可复现入口 + build_metrics.py
 results/    metrics.csv（★机器可读主表）、视频级 OOF、图、摘要 JSON
-docs/       结论与证据链、实验索引、方法学限制、讲稿
+docs/       结论与方法学依据、实验索引（自动生成）、方法学限制、讲稿
 MANIFEST/   大文件清单与原始数据来源
 ```
 
