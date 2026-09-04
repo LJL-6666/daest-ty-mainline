@@ -18,8 +18,14 @@ for arm in ["baseline","zeroshot","mlpft","ablation"]:
     for _,r in d.iterrows():
         rho="" if pd.isna(r.spearman_rho) else f"{r.spearman_rho:+.2f} (p={r.spearman_p:.3f})"
         c="" if pd.isna(r.within_video_const_pct) else f"{r.within_video_const_pct:.1f}%"
-        L.append(f"| {r.exp_id} | {r['name']} | {r.n_subs} | {r.n_class} | {r.chance:.1f}% | "
+        nm=r['name']+(" ⚠" if r.get("status")=="degenerate" else "")
+        L.append(f"| {r.exp_id} | {nm} | {r.n_subs} | {r.n_class} | {r.chance:.1f}% | "
                  f"**{r.overall_acc:.2f}%** | {r.ratio_to_chance:.2f}× | {r.n_recall_gt20}/{r.n_class} | {c} | {rho} |")
+    L.append("")
+dg=df[df.get("status")=="degenerate"] if "status" in df else df.iloc[0:0]
+if not dg.empty:
+    L+=["> **⚠ 标记的实验分类器已塌陷**，其准确率约等于最大类占比，不代表有效性能：",""]
+    for _,r in dg.iterrows(): L.append(f"> - {r.exp_id} {r['name']}：{r.note}")
     L.append("")
 b=df[df.arm=="baseline"].set_index("exp_id")
 L+=["## 派生指标","",

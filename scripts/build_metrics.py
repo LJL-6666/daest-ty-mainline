@@ -43,7 +43,15 @@ for eid,name,arm,task,lab,ns,nc,nf,rn,pat in E:
         v=(d.groupby(['subject_index','video_index'])
              .agg(y_true=('y_true','first'),y_pred=('y_pred',lambda s:s.mode().iloc[0])).reset_index())
         v.to_csv(f"{REPO}/results/oof_video_level/exp{eid}_{task}_{lab}_{nc}class.csv",index=False)
+    # 塌陷判据：某一类召回 >80% 且过 20% 的类不足 1/4，说明预测坍到单一类别，
+    # 此时 overall_acc 约等于最大类占比，不代表有效性能。
+    _r=np.array(rec); degen = bool(_r.max()>80 and (_r>20).sum()<=max(1,nc//4))
+    note=""
+    if degen:
+        _i=int(_r.argmax())
+        note=f"分类器塌陷：预测坍向第 {_i} 类（召回 {_r.max():.1f}%），其余类接近 0；准确率约等于该类占比，非有效性能"
     rows.append(dict(exp_id=eid,name=name,arm=arm,task=task,label_type=lab,n_subs=ns,n_class=nc,n_folds=nf,
+        status=("degenerate" if degen else "ok"),note=note,
         chance=round(100/nc,2),lds="bidirectional",running_norm=rn,per_subject_norm="on",reorder="on",
         overall_acc=round(acc,4),mean_subject_acc=round(float(sub.mean()),4),std_subject_acc=round(float(sub.std()),4),
         ratio_to_chance=round(acc/(100/nc),3),macro_recall=round(float(np.mean(rec)),4),
