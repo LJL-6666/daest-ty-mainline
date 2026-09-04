@@ -33,19 +33,40 @@ MANIFEST/   大文件清单与原始数据来源
 故 `results/oof_video_level/` 收录**视频级** OOF（每实验约 31 KB）——这不是压缩，是本来就该报的粒度。
 窗口级 OOF（共 213 MB）与特征（4.6 GB）不入库，见 `MANIFEST/artifacts.tsv`。
 
-## 复现
+## 复现：能做到哪一步
+
+**克隆后立刻可做（不需要任何外部数据）：**
+
+```bash
+python scripts/verify_repo.py     # 自检：视频级 OOF 重算 vs metrics.csv、塌陷标注、代码可导入
+```
+
+- 读 `results/metrics.csv`（16 个实验的全部指标）与 `results/oof_video_level/`（视频级预测）
+- 由视频级 OOF **独立重算**每个实验的准确率并与表核对（自检脚本已做，误差 < 0.05 点）
+- 看 `results/figures/` 全部图，读 `docs/`
+
+**需要 encoder 权重（已含在 `weights/`，60 MB）：**
 
 ```bash
 conda env create -f env/environment.yml && conda activate daest
-bash scripts/00_check_env.sh          # 验环境 + 逐块验 GPU（带超时，自动跳过故障卡）
-bash scripts/10_baselines.sh          # 实验 01–07
-bash scripts/20_transfers.sh          # 实验 08–13
-bash scripts/30_ablations.sh          # 实验 30–32
-bash scripts/40_export_figures.sh     # OOF 导出 + metrics.csv + 全部图
+source scripts/00_check_env.sh      # 逐块验 GPU，自动跳过故障卡
+# 跳过 train_ext，直接提特征 → 训分类头
 ```
 
-原始数据不在本仓库。先按 `env/PATHS.md` 设置环境变量，数据来源见 `MANIFEST/data_sources.md`。
-有 encoder 权重（36 MB，git-lfs）即可跳过 `train_ext`，直接从 `extract_fea` 起跑。
+**需要原始 EEG 数据（不在本仓库，见 `MANIFEST/data_sources.md`）：**
+
+从零跑通 `scripts/10_baselines.sh` 等四个脚本。数据需另行获取授权。
+
+### 诚实说明
+
+| 项 | 状态 |
+|---|---|
+| 结果可核对 | ✅ 视频级 OOF 与 metrics.csv 自洽，自检脚本可验 |
+| 代码可导入、无绝对路径 | ✅ 全部走环境变量，见 `env/PATHS.md` |
+| encoder 权重齐备 | ✅ 5 套，可跳过对比预训练 |
+| 逐窗 OOF 与特征 | ❌ 共 4.8 GB，未入库，见 `MANIFEST/artifacts.tsv`（可由权重重算） |
+| **原始 EEG 数据** | ❌ **不在本仓库，且需授权**——因此外部无法从零完整复现 |
+| `scripts/` 四个入口 | ⚠ 已写但**未在干净环境端到端验证过**；目录命名沿用历史约定，首次运行可能需按实际路径调整 |
 
 ## ⚠ 使用本仓库结果前必读
 
