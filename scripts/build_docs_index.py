@@ -8,19 +8,22 @@ TASK={"FACED":"FACED","movie":"TY 观影","comm":"TY 讲述"}
 L=["# 实验索引","",
    "> 本文件由 `scripts/build_docs_index.py` 从 `results/metrics.csv` 自动生成，请勿手工编辑。","",
    "全部为**跨被试 OOF**：每折训练时完全未见测试被试。`overall_acc` 为窗口池口径，",
-   "`mean_subject_acc` 为被试均值口径；素材类两者数学恒等，自评类因存在无效标签而略有差异。",""]
+   "**准确率主数为被试均值口径**（与报告一致）；「窗口池」列在两者相同时记 ＝。",
+   "素材类两口径数学恒等；自评类因存在无效标签（观影 3.64%、讲述 3.48%）相差 0.04–0.27 点。",""]
 for arm in ["baseline","zeroshot","mlpft","ablation"]:
     d=df[df.arm==arm]
     if d.empty: continue
     L+=[f"## {ARM[arm]}","",
-        "| # | 实验 | n | 类别 | 随机 | 准确率 | 倍数 | 召回>20%的类 | 视频内恒定率 | ρ vs 素材编号 |",
-        "|---|---|---|---|---|---|---|---|---|---|"]
+        "| # | 实验 | n | 类别 | 随机 | 准确率(被试均值) | 窗口池 | 倍数 | 召回>20%的类 | 视频内恒定率 | ρ vs 素材编号 |",
+        "|---|---|---|---|---|---|---|---|---|---|---|"]
     for _,r in d.iterrows():
         rho="" if pd.isna(r.spearman_rho) else f"{r.spearman_rho:+.2f} (p={r.spearman_p:.3f})"
         c="" if pd.isna(r.within_video_const_pct) else f"{r.within_video_const_pct:.1f}%"
         nm=r['name']+(" ⚠" if r.get("status")=="degenerate" else "")
+        same = abs(r.mean_subject_acc-r.overall_acc)<0.005
         L.append(f"| {r.exp_id} | {nm} | {r.n_subs} | {r.n_class} | {r.chance:.1f}% | "
-                 f"**{r.overall_acc:.2f}%** | {r.ratio_to_chance:.2f}× | {r.n_recall_gt20}/{r.n_class} | {c} | {rho} |")
+                 f"**{r.mean_subject_acc:.2f}%** | {'＝' if same else f'{r.overall_acc:.2f}%'} | "
+                 f"{r.mean_subject_acc/r.chance:.2f}× | {r.n_recall_gt20}/{r.n_class} | {c} | {rho} |")
     L.append("")
 dg=df[df.get("status")=="degenerate"] if "status" in df else df.iloc[0:0]
 if not dg.empty:
@@ -45,3 +48,19 @@ L+=[f"**{len(s)} 项全部不显著**（|ρ| ≤ {s.spearman_rho.abs().max():.2f
     "所有被试准确率均为 1/28 的整数倍。`results/oof_video_level/` 收录的即为该粒度。",""]
 open(f"{R}/docs/02_实验索引.md","w",encoding="utf8").write("\n".join(L))
 print("已生成 docs/02_实验索引.md")
+
+# ---- 附：与报告同构的 13 行主表（仅主线列）+ 同人差 ----
+import io as _io
+M=["# 主表（主线正确版）","",
+   "> 由 `scripts/build_docs_index.py` 自动生成。准确率为**被试均值**口径，跨被试 OOF。","",
+   "| # | 类别 | 实验 | n | 分类 | 随机 | 准确率 | 倍数 |","|---|---|---|---|---|---|---|---|"]
+CAT={"baseline":"基线","zeroshot":"零样本","mlpft":"MLP-FT","ablation":"消融"}
+for _,r in df[df.arm.isin(["baseline","zeroshot","mlpft"])].iterrows():
+    M.append(f"| {int(r.exp_id)} | {CAT[r.arm]} | {r['name']} | {r.n_subs} | {r.n_class} | "
+             f"{r.chance:.1f}% | **{r.mean_subject_acc:.2f}%** | {r.mean_subject_acc/r.chance:.2f}× |")
+_b=df[df.arm=="baseline"].set_index("exp_id")
+_d=_b.loc['06'].mean_subject_acc-_b.loc['07'].mean_subject_acc
+M+= [f"| 14 | 同人差 | 观影 − 讲述（matched51 重训） | 51 | 9 | — | **+{_d:.1f} pt** | — |","",
+     "消融项（30/32 见 `02_实验索引.md`）不列入主表，它们支撑 `03_方法学限制.md` 而非性能声明。"]
+open(f"{R}/docs/00_主表.md","w",encoding="utf8").write("\n".join(M))
+print("已生成 docs/00_主表.md")
