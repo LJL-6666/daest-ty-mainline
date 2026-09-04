@@ -16,7 +16,7 @@
 - **观影任务可解码**，约三成；**讲述任务基本做不动**，贴着随机线。
 - 冻结 FACED encoder 只重训分类头，观影可达 27.73%，接近本地从头训的 30.02%。
 - 全部 16 个实验见 `results/metrics.csv`；主表见 [`docs/00_主表.md`](docs/00_主表.md)，逐项细节见 [`docs/02_实验索引.md`](docs/02_实验索引.md)。
-- 准确率均为**被试均值**口径（与报告一致）。总结图：`results/figures/00_总结.png`。
+- 准确率均为**被试均值**口径（与报告一致）。总结图：`results/figures/summary/00_总结.png`。
 
 ## 目录
 
@@ -50,7 +50,7 @@ python scripts/verify_repo.py     # 自检：视频级 OOF 重算 vs metrics.csv
 
 - 读 `results/metrics.csv`（16 个实验的全部指标）与 `results/oof_video_level/`（视频级预测）
 - 由视频级 OOF **独立重算**每个实验的准确率并与表核对（自检脚本已做，误差 < 0.05 点）
-- 看 `results/figures/` 全部图，读 `docs/`
+- 看 `results/figures/`（五类子目录，见其 README）全部图，读 `docs/`
 
 **需要 encoder 权重（已含在 `weights/`，60 MB）：**
 
