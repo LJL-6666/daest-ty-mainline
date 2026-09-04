@@ -21,12 +21,18 @@
 ## 目录
 
 ```
-src/        三步流水线 train_ext → extract_fea → train_mlp，及导出/可视化
-scripts/    可复现入口 + build_metrics.py
-results/    metrics.csv（★机器可读主表）、视频级 OOF、图、摘要 JSON
-docs/       主表、结论与方法学依据、实验索引、方法学限制、讲稿（前两者自动生成）
-MANIFEST/   大文件清单与原始数据来源
+src/        三步流水线 train_ext → extract_fea → train_mlp，及导出/可视化（21 个文件闭包）
+scripts/    00–40 复现入口 + build_metrics/build_figures/build_docs_index/verify_repo
+weights/    encoder 32 个 + 分类头 40 个（60 MB）——有它即可跳过 train_ext
+results/    metrics.csv（★机器可读主表）、视频级 OOF、图（分五类）、摘要 JSON
+docs/       00 主表 · 01 结论与方法学依据 · 02 实验索引 · 03 方法学限制 · 04 讲稿
+            （00 与 02 由 metrics.csv 自动生成，勿手工编辑）
+env/        environment.yml（实测版本）· PATHS.md（环境变量）· VERSIONS.md（资源注意事项）
+MANIFEST/   大文件清单（4.8 GB 未入库）与原始数据来源
 ```
+
+**从哪读起**：`docs/00_主表.md` 看结果 → `docs/01` 看为什么这么设置 →
+`docs/03` 看限制 → `results/figures/per_experiment/` 看每个实验的图。
 
 ## 关于粒度
 
