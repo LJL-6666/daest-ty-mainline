@@ -1,7 +1,7 @@
 # DAEST · TY 情绪解码 · 主线正确版
 
 跨被试 EEG 情绪解码（DAEST：对比预训练 → 特征提取 → 分类头）。本仓库只收录**主线正确版**（做逐被试稳健归一化 + 做播放序重排 · 双向 LDS）
-的代码与结果。旧高分版仅作为方法学风险在 `docs/03_方法学限制.md` 中引用数字，不收录其代码与产物。
+的代码与结果。
 
 ## 核心结论
 
@@ -31,7 +31,7 @@ src/        三步流水线 train_ext → extract_fea → train_mlp，及导出/
 scripts/    00–40 复现入口 + build_metrics/build_figures/build_docs_index/verify_repo
 weights/    encoder 32 个 + 分类头 40 个（60 MB）——有它即可跳过 train_ext
 results/    metrics.csv（★机器可读主表）、视频级 OOF、图（分五类）、摘要 JSON
-docs/       00 主表 · 01 结论与方法学依据 · 02 实验索引 · 03 方法学限制 · 04 讲稿
+docs/       00 主表 · 01 结论与方法学依据 · 02 实验索引 · 03 方法学限制
             （00 与 02 由 metrics.csv 自动生成，勿手工编辑）
 env/        environment.yml（实测版本）· PATHS.md（环境变量）· VERSIONS.md（资源注意事项）
 MANIFEST/   大文件清单（4.8 GB 未入库）与原始数据来源
