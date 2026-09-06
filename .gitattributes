@@ -1,0 +1,14 @@
+# 默认按文本处理并统一为 LF，避免跨平台 diff 噪声
+* text=auto eol=lf
+
+# 二进制：不做行尾转换，也不参与文本 diff
+*.ckpt   binary
+*.npy    binary
+*.mat    binary
+*.pkl    binary
+*.png    binary
+*.pdf    binary
+
+# 说明：weights/ 下的 .ckpt 目前直接入库（约 60 MB，全仓库 ~62 MB）。
+# 若后续权重需要多次迭代，改用 Git LFS 或迁到 Zenodo/OSF 打 DOI，
+# 以免仓库体积随版本线性增长且无法回收。

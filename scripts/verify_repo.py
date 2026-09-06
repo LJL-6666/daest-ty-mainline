@@ -3,6 +3,9 @@
    校验视频级 OOF 能否重算出 metrics.csv 中的准确率，并检查引用完整性。"""
 import os,sys,glob,numpy as np,pandas as pd
 R=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# --skip-imports：跳过第 4 节（需要 torch / lightning 等完整训练环境）。
+# CI 只装 numpy+pandas 跑其余各节；完整校验请在本地 conda 环境下不带该参数运行。
+SKIP_IMPORTS = "--skip-imports" in sys.argv
 ok=True
 def chk(cond,msg):
     global ok; print(("  ✅ " if cond else "  ❌ ")+msg); ok = ok and cond
@@ -32,10 +35,13 @@ for _,r in df.iterrows():
     chk((r.status=="degenerate")==exp, f"{r.exp_id} status={r.status}（最大召回 {rec.max():.1f}%，过20%的类 {(rec>20).sum()}/{r.n_class}）")
 
 print("\n=== 4. 代码可导入 ===")
-sys.path.insert(0,f"{R}/src")
-for mod in ["data.io_utils","data.dataset","model.models","model.pl_models","utils.reorder_vids"]:
-    try: __import__(mod); chk(True,f"import {mod}")
-    except Exception as e: chk(False,f"import {mod} → {type(e).__name__}")
+if SKIP_IMPORTS:
+    print("  ⏭  已跳过（--skip-imports）：本节需要 torch / pytorch-lightning 等完整训练环境")
+else:
+    sys.path.insert(0,f"{R}/src")
+    for mod in ["data.io_utils","data.dataset","model.models","model.pl_models","utils.reorder_vids"]:
+        try: __import__(mod); chk(True,f"import {mod}")
+        except Exception as e: chk(False,f"import {mod} → {type(e).__name__}")
 
 print("\n=== 5. 权重 ===")
 ne=len(glob.glob(f"{R}/weights/encoders/**/*.ckpt",recursive=True))

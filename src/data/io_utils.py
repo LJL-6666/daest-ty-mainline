@@ -534,9 +534,7 @@ def save_sliced_data(sliced_data_dir, data, onesub_labels, n_samples_onesub, n_s
 
 def test_load_processed_SEEDV_data():
     data_dir = os.environ.get('DAEST_LEGACY_ROOT','./legacy')+'/SEEDV/EEG_processed_sxk'
-    # data_dir = 'D:/graduate/G2/xinke/SEEDV/EEG_processed_sxk'
     data_dir2 = os.environ.get('DAEST_LEGACY_ROOT','./legacy')+'/SEEDV/EEG_processed_sampled'
-    # data_dir2 = 'D:/graduate/G2/xinke/SEEDV/EEG_processed_sampled'
     timeLen = 5
     timeStep = 2
     fs = 250
@@ -557,9 +555,7 @@ def test_load_processed_SEEDV_data():
 def test_load_processed_SEEDV_NEW_data():
     data_dir = os.environ.get('DAEST_LEGACY_ROOT','./legacy')+'/SEEDV-NEW/processed_data'
     # data_dir = '.../all/model_weights/grm/SEEDV_new2/processed_ddata'
-    # data_dir = 'D:/graduate/G2/xinke/SEEDV/EEG_processed_sxk'
     data_dir2 = os.environ.get('DAEST_LEGACY_ROOT','./legacy')+'/SEEDV/EEG_processed_sampled'
-    # data_dir2 = 'D:/graduate/G2/xinke/SEEDV/EEG_processed_sampled'
     timeLen = 5
     timeStep = 2
     fs = 125

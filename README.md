@@ -52,6 +52,7 @@ MANIFEST/   大文件清单与原始数据来源
 
 ```bash
 python scripts/verify_repo.py     # 自检：视频级 OOF 重算 vs metrics.csv、塌陷标注、代码可导入
+python scripts/verify_repo.py --skip-imports   # 只需 numpy+pandas，不需要训练环境（CI 跑的就是这个）
 ```
 
 - 读 `results/metrics.csv`（16 个实验的全部指标）与 `results/oof_video_level/`（视频级预测）
