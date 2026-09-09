@@ -71,6 +71,11 @@ source scripts/00_check_env.sh      # 逐块验 GPU，自动跳过故障卡
 
 从零跑通 `scripts/10_baselines.sh` 等四个脚本。数据需另行获取授权。
 
+本仓库的输入 pkl / mat 由上游预处理仓库产出：
+**[LJL-6666/daest-ty-preprocessing](https://github.com/LJL-6666/daest-ty-preprocessing)**
+（TY 与 FACED 的 `.bdf` → 滤波 / 坏道插值 / ICA / 按播放顺序拼接 → pkl → mat）。
+两仓库通过 `DAEST_DATA_ROOT` 与 `DAEST_PREP_ROOT` 两个环境变量对接。
+
 ## 使用本仓库结果前必读
 
 `docs/03_方法学限制.md` 列了六条限制，其中三条会影响结论的表述方式：
